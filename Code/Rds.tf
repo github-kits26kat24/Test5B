@@ -1,10 +1,7 @@
 resource "aws_db_subnet_group" "mariadb-sg" {
   name        = "mariadb-subnet"
   description = "RDS subnet group"
-  subnet_ids = [
-    "aws_subnet.public_1.id",
-    "aws_subnet.privat.id"
-  ]
+  subnet_ids  = [aws_subnet.public_1.id, aws_subnet.private.id]
 }
 resource "aws_db_parameter_group" "mariadb-pg" {
   name   = "mariadb-parameter"
@@ -30,7 +27,7 @@ resource "aws_db_instance" "mariadb" {
   vpc_security_group_ids = [aws_security_group.ec2_test5b_sg.id]
   storage_type           = "gp2" # ?
   #backup_retention_period   = 30                                          # how long you’re going to keep your backups
-  #availability_zone         = [aws_subnet.Private.availability_zone] # prefered AZ
+  # availability_zone         = [aws_subnet.private.availability_zone] # prefered AZ
   #final_snapshot_identifier = "mariadb-final-snapshot"                    # final snapshot when executing terraform destroy
   tags = {
     Name = "mariadb-engine"
