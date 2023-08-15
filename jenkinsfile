@@ -1,35 +1,37 @@
 pipeline {
-
-    agent any 
+    agent any
+    
     parameters {
-        choice (name: "TARGET_Env", choices: ["dev", "sit"], description: "Target Deployment Environment")
+        choice(name: "TARGET_Env", choices: ["dev", "sit"], description: "Target Deployment Environment")
     }
 
     environment {
-        AWS_ACCESS_KEY_ID = credentials ('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials ('AWS_SECRET_ACCESS_KEY')
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
     }
     
     stages {
-        stage ("download code and env config") {
+        stage("download code and env config") {
             steps {
                 sh "git clone https://github.com/github-kits26kat24/Test5B.git"
+            }
         }
-        stage ('plan') {
-             steps {
+
+        stage('plan') {
+            steps {
                 sh '''
-                    cd Test5B
-                    terraform init -backend-config= ../Env/dev/backend.tfvars
+                    cd Test5B/Code
+                    terraform init -backend-config=../Env/dev/backend.tfvars
                     terraform plan --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars 
                 '''
-                script  {
+                script {
                     env.NEXT_STEP = input message: 'Implement plan?', ok: 'Implement',
-                    parameters: [choice (name: 'Implement', choices: 'apply\ndestroy\ndo nothing', description: 'implementation stage')]
+                    parameters: [choice(name: 'Implement', choices: ['apply', 'destroy', 'do nothing'], description: 'implementation stage')]
                 }
-            }   
-
+            }
         }
-        stage ('implement apply') {
+
+        stage('implement apply') {
             when {
                 expression {
                     env.NEXT_STEP == 'apply'
@@ -37,13 +39,14 @@ pipeline {
             }
             steps {
                 sh '''
-                   cd Test5B
-                    terraform init -backend-config= ../Env/dev/backend.tfvars
+                    cd Test5B
+                    terraform init -backend-config=../Env/dev/backend.tfvars
                     terraform apply --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars 
                 '''
             }
         }
-        stage ('implement destroy') {
+
+        stage('implement destroy') {
             when {
                 expression {
                     env.NEXT_STEP == 'destroy'
@@ -51,8 +54,8 @@ pipeline {
             }
             steps {
                 sh '''
-                  cd Test5B
-                    terraform init -backend-config= ../Env/dev/backend.tfvars
+                    cd Test5B
+                    terraform init -backend-config=../Env/dev/backend.tfvars
                     terraform destroy --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars 
                 '''
             }
@@ -65,5 +68,3 @@ pipeline {
         }
     }
 }
-}
-// end of script 

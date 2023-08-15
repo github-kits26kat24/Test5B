@@ -96,7 +96,7 @@ variable "ec2_name_2" {}
 variable "ec2_name_3" {}
 # variable "ec2_instance_type" {}
 variable "sg_name" {}
-variable "default_tags" {}
+# variable "default_tags" {}
 # variable "ec2_ami" {}
 variable "aws_region" {}
 variable "RDS_PASSWORD" {}
