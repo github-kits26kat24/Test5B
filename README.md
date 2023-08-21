@@ -16,3 +16,11 @@
 # sudo systemctl enable jenkins
 # sudo systemctl start jenkins
 # sudo systemctl status jenkins
+
+
+# line 26
+
+<!-- script {
+                    env.NEXT_STEP = input message: 'Implement plan?', ok: 'Implement',
+                    parameters: [choice(name: 'Implement', choices: ['apply', 'destroy', 'do nothing'], description: 'implementation stage')]
+                } -->
