@@ -26,6 +26,10 @@ pipeline {
                     terraform init --backend-config=../Env/dev/backend.tfvars
                     terraform validate
                 '''
+                 script {
+                    env.NEXT_STEP = input message: 'Implement plan?', ok: 'Implement',
+                    parameters: [choice(name: 'Implement', choices: ['apply', 'destroy', 'do nothing'], description: 'implementation stage')]
+                }
             }
         }
 
@@ -37,10 +41,6 @@ pipeline {
                     terraform plan --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars
                     terraform plan
                 '''
-                script {
-                    env.NEXT_STEP = input message: 'Implement plan?', ok: 'Implement',
-                    parameters: [choice(name: 'Implement', choices: ['init', 'plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
-                }
             }
         }
 
