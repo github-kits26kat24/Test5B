@@ -28,7 +28,7 @@ pipeline {
                     sh 'terraform validate'
                 '''
                 script {
-                    env.NEXT_STEP = input message: 'Implement validation?', ok: 'Implement',
+                    env.NEXT_STEP = input message: 'Implement init?', ok: 'Implement',
                     parameters: [choice(name: 'Implement', choices: ['init', 'plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
                 }
             }
