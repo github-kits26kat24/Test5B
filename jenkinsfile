@@ -28,12 +28,17 @@ pipeline {
                 '''
                  script {
                     env.NEXT_STEP = input message: 'Implement plan?', ok: 'Implement',
-                    parameters: [choice(name: 'Implement', choices: ['apply', 'destroy', 'do nothing'], description: 'implementation stage')]
+                    parameters: [choice(name: 'Implement', choices: ['plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
                 }
             }
         }
 
-         stage('terraform plan') {
+         stage('implement plan') {
+            when {
+                expression {
+                    env.NEXT_STEP == 'plan'
+                }
+            }
             steps {
                 sh '''
                     cd Test5B/Code
