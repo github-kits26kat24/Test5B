@@ -24,7 +24,7 @@ pipeline {
                     cd Test5B/Code
                     echo 'about to perform code validation'
                     terraform init --backend-config=../Env/dev/backend.tfvars
-                    sh 'terraform validate'
+                    terraform validate
                 '''
             }
         }
@@ -35,8 +35,12 @@ pipeline {
                     cd Test5B/Code
                     echo 'about to perform terraform plan'
                     terraform plan --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
-                    sh 'terraform plan' 
+                    terraform plan
                 '''
+                script {
+                    env.NEXT_STEP = input message: 'Implement plan?', ok: 'Implement',
+                    parameters: [choice(name: 'Implement', choices: ['init', 'plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
+                }
             }
         }
 
@@ -51,7 +55,7 @@ pipeline {
                     cd Test5B/Code
                     echo 'about to perform terraform apply'
                     terraform apply --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
-                    sh 'terraform apply'
+                    terraform apply
                 '''
             }
         }
@@ -67,7 +71,7 @@ pipeline {
                     cd Test5B/Code
                     echo 'about to perform terraform destroy'
                     terraform destroy --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
-                    sh 'terraform destroy'
+                    terraform destroy
                 '''
             }
         }
