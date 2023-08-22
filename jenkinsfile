@@ -8,6 +8,7 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+        AWS_REGION = 'eu-west-1'
     }
     
     stages {
@@ -17,16 +18,33 @@ pipeline {
             }
         }
 
-        stage('plan') {
+        stage('terraform validate') {
             steps {
                 sh '''
                     cd Test5B/Code
+                    ls-ltr
+                    echo 'about to perform code validation'
                     terraform init --backend-config=../Env/dev/backend.tfvars
-                    terraform plan --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars 
+                    sh 'terraform validate'
+                '''
+                script {
+                    env.NEXT_STEP = input message: 'Implement validation?', ok: 'Implement',
+                    parameters: [choice(name: 'Implement', choices: ['init', 'plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
+                }
+            }
+        }
+
+         stage('terraform plan') {
+            steps {
+                sh '''
+                    cd Test5B/Code
+                    echo 'about to perform terraform plan'
+                    terraform plan --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
+                    sh 'terraform plan' 
                 '''
                 script {
                     env.NEXT_STEP = input message: 'Implement plan?', ok: 'Implement',
-                    parameters: [choice(name: 'Implement', choices: ['apply', 'destroy', 'do nothing'], description: 'implementation stage')]
+                    parameters: [choice(name: 'Implement', choices: ['init', 'plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
                 }
             }
         }
@@ -40,8 +58,9 @@ pipeline {
             steps {
                 sh '''
                     cd Test5B/Code
-                    terraform init --backend-config=../Env/dev/backend.tfvars
+                    echo 'about to perform terraform apply'
                     terraform apply --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
+                    sh 'terraform apply'
                 '''
             }
         }
@@ -55,8 +74,9 @@ pipeline {
             steps {
                 sh '''
                     cd Test5B/Code
-                    terraform init --backend-config=../Env/dev/backend.tfvars
+                    echo 'about to perform terraform destroy'
                     terraform destroy --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
+                    sh 'terraform destroy'
                 '''
             }
         }
