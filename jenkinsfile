@@ -22,7 +22,6 @@ pipeline {
             steps {
                 sh '''
                     cd Test5B/Code
-                    "ls-ltr"
                     echo 'about to perform code validation'
                     terraform init --backend-config=../Env/dev/backend.tfvars
                     sh 'terraform validate'
