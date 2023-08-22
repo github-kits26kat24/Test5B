@@ -34,7 +34,7 @@ pipeline {
                 sh '''
                     cd Test5B/Code
                     echo 'about to perform terraform plan'
-                    terraform plan --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
+                    terraform plan --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars
                     terraform plan
                 '''
                 script {
