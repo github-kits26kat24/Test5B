@@ -17,11 +17,11 @@ variable "ec2_key_name" {
   default     = "Kitskat2023"
 }
 
-# variable "sg_name" {
-#   description = "This is a variable to manage ec2 key name"
-#   type        = string
-#   default     = "kay_sg"
-# }
+variable "sg_name" {
+  description = "This is a variable to manage ec2 key name"
+  type        = string
+  default     = "kay_sg"
+}
 
 variable "subnet" {
   description = "This is a variable to manage ec2 key name"
@@ -95,10 +95,10 @@ variable "ec2_name_1" {}
 variable "ec2_name_2" {}
 variable "ec2_name_3" {}
 # variable "ec2_instance_type" {}
-variable "sg_name" {}
+# variable "sg_name" {}
 # variable "default_tags" {}
 # variable "ec2_ami" {}
-variable "aws_region" {}
+# variable "aws_region" {}
 # variable "RDS_PASSWORD" {}
 # variable "RDS_USERNAME" {}
 # variable "ec2_key_name" {}
