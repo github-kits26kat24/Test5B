@@ -120,7 +120,7 @@ variable "key" {
 
 # variable "bucket" {}
 # variable "key" {}
-# variable "env" {}
+variable "env" {}
 # variable "ec2_name_1" {}
 # variable "ec2_name_2" {}
 # variable "ec2_name_3" {}
