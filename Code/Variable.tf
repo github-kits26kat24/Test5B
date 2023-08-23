@@ -99,6 +99,6 @@ variable "sg_name" {}
 # variable "default_tags" {}
 # variable "ec2_ami" {}
 variable "aws_region" {}
-# variable "RDS_PASSWORD" {}
-# variable "RDS_USERNAME" {}
+variable "RDS_PASSWORD" {}
+variable "RDS_USERNAME" {}
 # variable "ec2_key_name" {}
