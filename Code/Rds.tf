@@ -19,8 +19,8 @@ resource "aws_db_instance" "mariadb" {
   instance_class         = "db.t2.micro" # use micro if you want to use the free tier
   identifier             = "mariadb"
   db_name                = "mydatabase"     # database name
-  username               = var.RDS_USERNAME # username
-  password               = var.RDS_PASSWORD # password
+  username               = "kits26kat2486" # var.RDS_USERNAME # username
+  password               = "kitskatrds" # var.RDS_PASSWORD # password
   db_subnet_group_name   = aws_db_subnet_group.mariadb-sg.name
   parameter_group_name   = aws_db_parameter_group.mariadb-pg.name
   multi_az               = "false" # set to true to have high availability: 2 instances synchronized with each other
