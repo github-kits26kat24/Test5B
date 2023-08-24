@@ -121,9 +121,9 @@ variable "sit_default_tags" {
 variable "bucket" {}
 variable "key" {}
 variable "env" {}
-variable "ec2_name_1" {}
-variable "ec2_name_2" {}
-variable "ec2_name_3" {}
+# variable "ec2_name_1" {}
+# variable "ec2_name_2" {}
+# variable "ec2_name_3" {}
 variable "sg_name" {}
 
 # variable "ec2_instance_type" {}
