@@ -11,7 +11,7 @@ sg_name = "kay_sg"
 
 ec2_ami = "ami-04f7efe62f419d9f5"
 ec2_instance_type = "t2.micro"
-aws_region = "eu-west-1"
+# aws_region = "eu-west-1"
 ec2_key_name   = "Kitskat2023"
 env = "dev"
 
