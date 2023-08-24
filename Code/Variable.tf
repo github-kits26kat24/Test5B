@@ -113,8 +113,8 @@ variable "sit_default_tags" {
 # variable "default_tags" {}
 # variable "ec2_ami" {}
 # variable "aws_region" {}
-# variable "RDS_PASSWORD" {}
-# variable "RDS_USERNAME" {}
+variable "RDS_PASSWORD" {}
+variable "RDS_USERNAME" {}
 
 variable "env" {
   description = "This is a variable to manage ec2 env name"
