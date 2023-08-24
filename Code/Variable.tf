@@ -119,7 +119,7 @@ variable "sit_default_tags" {
 
 variable "bucket" {}
 variable "key" {}
-variable "env" {}
+variable "Env" {}
 
 # variable "ec2_name_1" {}
 # variable "ec2_name_2" {}
