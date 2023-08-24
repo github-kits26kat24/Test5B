@@ -105,17 +105,17 @@ variable "sit_default_tags" {
   }
 }
 
-variable "bucket" {
-  description = "This is a variable to manage ec2 bucket name"
-  type        = string
-  default     = "kits-test5b"
-}
+# variable "bucket" {
+#   description = "This is a variable to manage ec2 bucket name"
+#   type        = string
+#   default     = "kits-test5b"
+# }
 
-variable "key" {
-  description = "This is a variable to manage ec2 bucket name"
-  type        = string
-  default     = "dev/terraform.tfstate"
-}
+# variable "key" {
+#   description = "This is a variable to manage ec2 bucket name"
+#   type        = string
+#   default     = "dev/terraform.tfstate"
+# }
 
 variable "bucket" {}
 variable "key" {}
