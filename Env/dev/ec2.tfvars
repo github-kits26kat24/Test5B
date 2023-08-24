@@ -1,9 +1,9 @@
 # ec2_key_name = "Kitskat2023"
 # sg_name =  "kay_sg"
 
-# ec2_name_1 = "node_1"
-# ec2_name_2= "node_2"
-# ec2_name_3= "MariaDB"
+ec2_name_1 = "node_1"
+ec2_name_2= "node_2"
+ec2_name_3= "MariaDB"
 
 sg_name = "kay_sg"
 # RDS_PASSWORD = "kits26kat2486"
