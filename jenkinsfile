@@ -49,7 +49,7 @@ pipeline {
         //     }
         // }
 
-        stage('implement apply') {
+        stage('terraform apply') {
             // when {
             //     expression {
             //         env.NEXT_STEP == 'apply'
@@ -69,7 +69,7 @@ pipeline {
             }
         }
 
-        stage('implement destroy') {
+        stage('terraform destroy') {
             // when {
             //     expression {
             //         env.NEXT_STEP == 'destroy'
