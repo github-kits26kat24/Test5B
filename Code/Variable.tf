@@ -102,7 +102,7 @@ variable "sit_default_tags" {
 
 # variable "bucket" {}
 # variable "key" {}
-variable "env" {}
+# variable "env" {}
 
 # variable "ec2_name_1" {}
 # variable "ec2_name_2" {}
@@ -116,6 +116,11 @@ variable "env" {}
 # variable "RDS_PASSWORD" {}
 # variable "RDS_USERNAME" {}
 
+variable "env" {
+  description = "This is a variable to manage ec2 env name"
+  type        = string
+  default     = "dev"
+}
 variable "bucket" {
   description = "This is a variable to manage ec2 bucket name"
   type        = string
