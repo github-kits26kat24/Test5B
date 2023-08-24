@@ -34,11 +34,11 @@ pipeline {
         }
 
          stage('implement plan') {
-            when {
-                expression {
-                    env.NEXT_STEP == 'plan'
-                }
-            }
+            // when {
+            //     expression {
+            //         env.NEXT_STEP == 'plan'
+            //     }
+            // }
             steps {
                 sh '''
                     cd Test5B/Code
@@ -50,11 +50,11 @@ pipeline {
         }
 
         stage('implement apply') {
-            when {
-                expression {
-                    env.NEXT_STEP == 'apply'
-                }
-            }
+            // when {
+            //     expression {
+            //         env.NEXT_STEP == 'apply'
+            //     }
+            // }
             steps {
                 sh '''
                     cd Test5B/Code
@@ -66,11 +66,11 @@ pipeline {
         }
 
         stage('implement destroy') {
-            when {
-                expression {
-                    env.NEXT_STEP == 'destroy'
-                }
-            }
+            // when {
+            //     expression {
+            //         env.NEXT_STEP == 'destroy'
+            //     }
+            // }
             steps {
                 sh '''
                     cd Test5B/Code
