@@ -59,22 +59,22 @@ variable "availability_zone" {
   default     = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
 }
 
-# variable "ec2_dev_public_ip_1" {
-#   description = "This is a variable to manage ec2 dev_public_ip_1 name"
-#   type        = string
-#   default     = "aws_instance.Marketing_Node.public_ip"
-# }
-# variable "ec2_dev_public_ip_2" {
-#   description = "This is a variable to manage ec2 dev_public_ip_2 name"
-#   type        = string
-#   default     = "aws_instance.Finance_Node.public_ip"
-# }
+variable "ec2_dev_public_ip_1" {
+  description = "This is a variable to manage ec2 dev_public_ip_1 name"
+  type        = string
+  default     = "aws_instance.Marketing_Node.public_ip"
+}
+variable "ec2_dev_public_ip_2" {
+  description = "This is a variable to manage ec2 dev_public_ip_2 name"
+  type        = string
+  default     = "aws_instance.Finance_Node.public_ip"
+}
 
-# variable "ec2_sit_public_ip_3" {
-#   description = "This is a variable to manage ec2 sit_public_ip_3 name"
-#   type        = string
-#   default     = "aws_instance.Legal_Node.public_ip"
-# }
+variable "ec2_sit_public_ip_3" {
+  description = "This is a variable to manage ec2 sit_public_ip_3 name"
+  type        = string
+  default     = "aws_instance.Legal_Node.public_ip"
+}
 
 variable "dev_default_tags_1" {
   description = "This variable is declared here to manage ec2 tags"
@@ -118,13 +118,9 @@ variable "sit_default_tags" {
 #   default     = "dev/terraform.tfstate"
 # }
 
-   bucket = var.bucket
-    key    = var.key
-  } 
-
 variable "bucket" {}
 variable "key" {}
-variable "env" {}
+# variable "env" {}
 
 # variable "ec2_name_1" {}
 # variable "ec2_name_2" {}
