@@ -13,11 +13,11 @@ resource "aws_db_parameter_group" "mariadb-pg" {
   }
 }
 resource "aws_db_instance" "mariadb" {
-  allocated_storage      = 5 # 100 GB of storage, gives us more IOPS than a lower number
-  engine                 = "mariadb"
-  engine_version         = "10.3"
-  instance_class         = "db.t2.micro" # use micro if you want to use the free tier
-  identifier             = "mariadb"
+  allocated_storage = 5 # 100 GB of storage, gives us more IOPS than a lower number
+  engine            = "mariadb"
+  engine_version    = "10.3"
+  instance_class    = "db.t2.micro" # use micro if you want to use the free tier
+  # identifier             = "mariadb"
   db_name                = "mydatabase"    # database name
   username               = "kits26kat2486" # var.RDS_USERNAME # username
   password               = "kitskatrds"    # var.RDS_PASSWORD # password
@@ -28,8 +28,8 @@ resource "aws_db_instance" "mariadb" {
   storage_type           = "gp2" # ?
   #backup_retention_period   = 30                                          # how long you’re going to keep your backups
   # availability_zone         = [aws_subnet.private.availability_zone] # prefered AZ
-  # final_snapshot_identifier = "mariadb-final-snapshot" # final snapshot when executing terraform destroy
-  # skip_final_snapshot       = "true"
+  final_snapshot_identifier = "mariadb-final-snapshot" # final snapshot when executing terraform destroy
+  skip_final_snapshot       = "false"
   tags = {
     Name = "mariadb-engine"
   }
