@@ -52,7 +52,7 @@ pipeline {
                     terraform apply --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
                 '''
                    script {
-                    env.NEXT_STEP = input message: 'Implement ?', ok: 'Implement',
+                    env.NEXT_STEP = input message: 'Implement apply?', ok: 'Implement',
                     parameters: [choice(name: 'Implement', choices: ['plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
                 }
             }
@@ -61,10 +61,13 @@ pipeline {
         stage('terraform destroy') {
             steps {
                 sh '''
-                    cd Test5B/Code
                     echo 'about to perform terraform destroy'
                     terraform destroy --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
                 '''
+                  script {
+                    env.NEXT_STEP = input message: 'Implement destroy?', ok: 'Implement',
+                    parameters: [choice(name: 'Implement', choices: ['plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
+                }
             }
         }
     }
