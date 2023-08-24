@@ -100,17 +100,17 @@ variable "sit_default_tags" {
   }
 }
 
-variable "RDS_PASSWORD" {
-  description = "This is a variable to manage ec2 sit_public_ip_3 name"
-  type        = string
-  default     = "kits26kat2486"
-}
+# variable "RDS_PASSWORD" {
+#   description = "This is a variable to manage ec2 sit_public_ip_3 name"
+#   type        = string
+#   default     = "kits26kat2486"
+# }
 
-variable "RDS_USERNAME" {
-  description = "This is a variable to manage ec2 sit_public_ip_3 name"
-  type        = string
-  default     = "kitskatrds"
-}
+# variable "RDS_USERNAME" {
+#   description = "This is a variable to manage ec2 sit_public_ip_3 name"
+#   type        = string
+#   default     = "kitskatrds"
+# }
 
 # variable "bucket" {}
 # variable "key" {}
