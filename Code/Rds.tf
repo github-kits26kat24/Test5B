@@ -17,7 +17,7 @@ resource "aws_db_instance" "mariadb" {
   engine            = "mariadb"
   engine_version    = "10.3"
   instance_class    = "db.t2.micro" # use micro if you want to use the free tier
-  # identifier             = "mariadb"
+  identifier             = "mariadb"
   db_name                = "mydatabase"    # database name
   username               = "kits26kat2486" # var.RDS_USERNAME # username
   password               = "kitskatrds"    # var.RDS_PASSWORD # password
@@ -29,7 +29,7 @@ resource "aws_db_instance" "mariadb" {
   #backup_retention_period   = 30                                          # how long you’re going to keep your backups
   # availability_zone         = [aws_subnet.private.availability_zone] # prefered AZ
   final_snapshot_identifier = "mariadb-final-snapshot" # final snapshot when executing terraform destroy
-  skip_final_snapshot       = "false"
+  skip_final_snapshot       = "false" # If you want a snapshot of the RDS instance before it gets destroyed and recreated
   tags = {
     Name = "mariadb-engine"
   }
