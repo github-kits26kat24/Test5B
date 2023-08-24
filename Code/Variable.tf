@@ -60,19 +60,18 @@ variable "availability_zone" {
 }
 
 variable "ec2_dev_public_ip_1" {
-  description = "This is a variable to manage ec2 key name"
+  description = "This is a variable to manage ec2 dev_public_ip_1 name"
   type        = string
   default     = "aws_instance.Marketing_Node.public_ip"
 }
-
 variable "ec2_dev_public_ip_2" {
-  description = "This is a variable to manage ec2 key name"
+  description = "This is a variable to manage ec2 dev_public_ip_2 name"
   type        = string
   default     = "aws_instance.Finance_Node.public_ip"
 }
 
 variable "ec2_sit_public_ip_3" {
-  description = "This is a variable to manage ec2 key name"
+  description = "This is a variable to manage ec2 sit_public_ip_3 name"
   type        = string
   default     = "aws_instance.Legal_Node.public_ip"
 }
@@ -118,15 +117,15 @@ variable "key" {
   default     = "dev/terraform.tfstate"
 }
 
-# variable "bucket" {}
-# variable "key" {}
-# variable "env" {}
+variable "bucket" {}
+variable "key" {}
+variable "env" {}
+
 # variable "ec2_name_1" {}
 # variable "ec2_name_2" {}
 # variable "ec2_name_3" {}
 # variable "sg_name" {}
 # variable "ec2_key_name" {}
-
 # variable "ec2_instance_type" {}
 # variable "default_tags" {}
 # variable "ec2_ami" {}
