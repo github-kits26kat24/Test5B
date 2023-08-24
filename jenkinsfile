@@ -62,7 +62,7 @@ pipeline {
             steps {
                 sh '''
                     echo 'about to perform terraform destroy'
-                    terraform destroy --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
+                    terraform destroy --auto-approve
                 '''
                   script {
                     env.NEXT_STEP = input message: 'Implement destroy?', ok: 'Implement',
