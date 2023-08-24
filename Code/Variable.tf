@@ -100,8 +100,8 @@ variable "sit_default_tags" {
   }
 }
 
-variable "bucket" {}
-variable "key" {}
+# variable "bucket" {}
+# variable "key" {}
 variable "env" {}
 
 # variable "ec2_name_1" {}
@@ -116,14 +116,14 @@ variable "env" {}
 # variable "RDS_PASSWORD" {}
 # variable "RDS_USERNAME" {}
 
-# variable "bucket" {
-#   description = "This is a variable to manage ec2 bucket name"
-#   type        = string
-#   default     = "kits-test5b"
-# }
+variable "bucket" {
+  description = "This is a variable to manage ec2 bucket name"
+  type        = string
+  default     = "kits-test5b"
+}
 
-# variable "key" {
-#   description = "This is a variable to manage ec2 bucket name"
-#   type        = string
-#   default     = "dev/terraform.tfstate"
-# }
+variable "key" {
+  description = "This is a variable to manage ec2 bucket name"
+  type        = string
+  default     = "dev/terraform.tfstate"
+}
