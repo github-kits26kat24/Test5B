@@ -58,18 +58,18 @@ pipeline {
             }
         }
 
-        stage('terraform destroy') {
-            steps {
-                sh '''
-                    echo 'about to perform terraform destroy'
-                    terraform destroy --auto-approve
-                '''
-                  script {
-                    env.NEXT_STEP = input message: 'Implement destroy?', ok: 'Implement',
-                    parameters: [choice(name: 'Implement', choices: ['plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
-                }
-            }
-        }
+        // stage('terraform destroy') {
+        //     steps {
+        //         sh '''
+        //             echo 'about to perform terraform destroy'
+        //             terraform destroy --auto-approve
+        //         '''
+        //           script {
+        //             env.NEXT_STEP = input message: 'Implement destroy?', ok: 'Implement',
+        //             parameters: [choice(name: 'Implement', choices: ['plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
+        //         }
+        //     }
+        // }
     }
     
     post {
