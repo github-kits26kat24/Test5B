@@ -100,6 +100,18 @@ variable "sit_default_tags" {
   }
 }
 
+variable "RDS_PASSWORD" {
+  description = "This is a variable to manage ec2 sit_public_ip_3 name"
+  type        = string
+  default     = "kits26kat2486"
+}
+
+variable "RDS_USERNAME" {
+  description = "This is a variable to manage ec2 sit_public_ip_3 name"
+  type        = string
+  default     = "kitskatrds"
+}
+
 # variable "bucket" {}
 # variable "key" {}
 # variable "env" {}
@@ -113,8 +125,8 @@ variable "sit_default_tags" {
 # variable "default_tags" {}
 # variable "ec2_ami" {}
 # variable "aws_region" {}
-variable "RDS_PASSWORD" {}
-variable "RDS_USERNAME" {}
+# variable "RDS_PASSWORD" {}
+# variable "RDS_USERNAME" {}
 
 variable "env" {
   description = "This is a variable to manage ec2 env name"
