@@ -112,7 +112,7 @@ variable "sit_default_tags" {
 # variable "ec2_instance_type" {}
 # variable "default_tags" {}
 # variable "ec2_ami" {}
-# variable "aws_region" {}
+variable "aws_region" {}
 # variable "RDS_PASSWORD" {}
 # variable "RDS_USERNAME" {}
 
