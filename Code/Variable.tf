@@ -125,6 +125,7 @@ variable "env" {}
 # variable "ec2_name_2" {}
 # variable "ec2_name_3" {}
 variable "sg_name" {}
+variable "ec2_key_name" {}
 
 # variable "ec2_instance_type" {}
 # variable "default_tags" {}
@@ -132,4 +133,3 @@ variable "sg_name" {}
 # variable "aws_region" {}
 # variable "RDS_PASSWORD" {}
 # variable "RDS_USERNAME" {}
-# variable "ec2_key_name" {}
