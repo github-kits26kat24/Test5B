@@ -11,35 +11,35 @@ variable "ec2_instance_type" {
   default     = "t2.micro"
 }
 
-variable "ec2_key_name" {
-  description = "This is a variable to manage ec2 key name"
-  type        = string
-  default     = "Kitskat2023"
-}
+# variable "ec2_key_name" {
+#   description = "This is a variable to manage ec2 key name"
+#   type        = string
+#   default     = "Kitskat2023"
+# }
 
-variable "ec2_name_1" {
-  description = "This is a variable to manage ec2 key name"
-  type        = string
-  default     = "node_01"
-}
+# variable "ec2_name_1" {
+#   description = "This is a variable to manage ec2 key name"
+#   type        = string
+#   default     = "node_01"
+# }
 
-variable "ec2_name_2" {
-  description = "This is a variable to manage ec2 key name"
-  type        = string
-  default     = "node_02"
-}
+# variable "ec2_name_2" {
+#   description = "This is a variable to manage ec2 key name"
+#   type        = string
+#   default     = "node_02"
+# }
 
-variable "ec2_name_3" {
-  description = "This is a variable to manage ec2 key name"
-  type        = string
-  default     = "MariaDB_01"
-}
+# variable "ec2_name_3" {
+#   description = "This is a variable to manage ec2 key name"
+#   type        = string
+#   default     = "MariaDB_01"
+# }
 
-variable "sg_name" {
-  description = "This is a variable to manage ec2 key name"
-  type        = string
-  default     = "kay_sg"
-}
+# variable "sg_name" {
+#   description = "This is a variable to manage ec2 key name"
+#   type        = string
+#   default     = "kay_sg"
+# }
 
 variable "subnet" {
   description = "This is a variable to manage ec2 key name"
@@ -106,25 +106,25 @@ variable "sit_default_tags" {
   }
 }
 
-variable "bucket" {
-  description = "This is a variable to manage ec2 bucket name"
-  type        = string
-  default     = "kits-test5b"
-}
+# variable "bucket" {
+#   description = "This is a variable to manage ec2 bucket name"
+#   type        = string
+#   default     = "kits-test5b"
+# }
 
-variable "key" {
-  description = "This is a variable to manage ec2 bucket name"
-  type        = string
-  default     = "dev/terraform.tfstate"
-}
+# variable "key" {
+#   description = "This is a variable to manage ec2 bucket name"
+#   type        = string
+#   default     = "dev/terraform.tfstate"
+# }
 
-# variable "bucket" {}
-# variable "key" {}
+variable "bucket" {}
+variable "key" {}
 variable "env" {}
-# variable "ec2_name_1" {}
-# variable "ec2_name_2" {}
-# variable "ec2_name_3" {}
-# variable "sg_name" {}
+variable "ec2_name_1" {}
+variable "ec2_name_2" {}
+variable "ec2_name_3" {}
+variable "sg_name" {}
 
 # variable "ec2_instance_type" {}
 # variable "default_tags" {}
