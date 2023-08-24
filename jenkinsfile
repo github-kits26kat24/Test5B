@@ -51,6 +51,10 @@ pipeline {
                     echo 'about to perform terraform apply'
                     terraform apply --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
                 '''
+                   script {
+                    env.NEXT_STEP = input message: 'Implement ?', ok: 'Implement',
+                    parameters: [choice(name: 'Implement', choices: ['plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
+                }
             }
         }
 
