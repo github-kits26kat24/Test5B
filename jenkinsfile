@@ -29,18 +29,19 @@ pipeline {
             }
         }
 
-        stage('implement plan') {
-            steps {
-              script {
-                 def planFilePath = "terraform-plan.tfplan"
-                sh '''
+stage('implement plan') {
+    steps {
+        script {
+            def planFilePath = "terraform-plan.tfplan"
+
+            sh '''
                 cd Test5B/Code
                 echo 'about to perform terraform plan'
                 terraform plan --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars -out=${planFilePath}
             '''
-                }
-            }
         }
+    }
+}
         stage ('terraform deploy') {
             options {
                 timeout(time: 2, unit: 'MINUTES')
@@ -67,14 +68,18 @@ pipeline {
             // Call the stage for applying the Terraform configuration
             stage('Apply Terraform') {
         stage('Apply Terraform') {
-            steps {
-                sh '''
-                   cd Test5B/Code
-                   echo 'about to perform terraform apply'
-                   terraform apply ${planFilePath} --auto-approve
-                '''
-                }
-            }
+    steps {
+        script {
+            def planFilePath = "terraform-plan.tfplan"
+
+            sh '''
+                cd Test5B/Code
+                echo 'about to perform terraform apply'
+                terraform apply ${planFilePath} --auto-approve
+            '''
+        }
+    }
+}
         }
             } else if (userChoice == 'destroy') {
                         echo "User chose to destroy the Terraform configuration"
