@@ -35,19 +35,18 @@ pipeline {
                     cd Test5B/Code
                     echo 'about to perform terraform plan'
                     terraform plan --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars
-                    terraform plan
                 '''
             }
         }
 
         stage ('terraform deploy') {
-             options {
-                timeout (time: 2, unit: 'MINUTES')
+            options {
+                timeout(time: 2, unit: 'MINUTES')
             }
 
-            steps  {
-                input (message : "Happy to deploy?")
-                echo 'would have deploy'
+            steps {
+                input(message: "Happy to deploy?")
+                echo 'would have deployed'
             }
         }
 
@@ -60,9 +59,8 @@ pipeline {
                             choice(name: 'actionChoice', choices: ['apply', 'destroy'], description: 'Choose to apply or destroy')
                         ]
                     )
-                }
-            }        
-            if (userChoice == 'apply') {
+                    
+                    if (userChoice == 'apply') {
                         echo "User chose to apply the Terraform configuration."
                         // Call the stage for applying the Terraform configuration
                         stage('Apply Terraform') {
@@ -74,8 +72,7 @@ pipeline {
                                 '''
                             }
                         }
-                    }         
-            else if (userChoice == 'destroy') {
+                    } else if (userChoice == 'destroy') {
                         echo "User chose to destroy the Terraform configuration."
                         // Call the stage for destroying the Terraform configuration
                         stage('Destroy Terraform') {
@@ -83,44 +80,39 @@ pipeline {
                                 sh '''
                                     cd Test5B/Code
                                     echo 'about to perform terraform destroy'
-                                    terraform destroy --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
+                                    terraform destroy --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars --auto-approve
                                 '''
                             }
                         }
-                    } 
-            else {
-                error "Invalid choice: ${userChoice}"
-             }
+                    } else {
+                        error "Invalid choice: ${userChoice}"
+                    }
+                }
+            }
         }
+
         stage ('Delete RDS Snapshot') {
             steps {
-               script {
-                   def snapshotIdentifier = "mariadb-final-snapshot" // Replace with the actual snapshot identifier
+                script {
+                    def snapshotIdentifier = "mariadb-final-snapshot" // Replace with the actual snapshot identifier
 
-                   def deleteSnapshotCmd = "aws rds delete-db-snapshot --db-snapshot-identifier ${snapshotIdentifier}"
+                    def deleteSnapshotCmd = "aws rds delete-db-snapshot --db-snapshot-identifier ${snapshotIdentifier}"
             
-                   def deleteSnapshotResult = sh(script: deleteSnapshotCmd, returnStatus: true)
+                    def deleteSnapshotResult = sh(script: deleteSnapshotCmd, returnStatus: true)
             
-                   if (deleteSnapshotResult == 0) {
-                   echo "Snapshot ${snapshotIdentifier} deleted successfully."
-                     } 
-            else {
+                    if (deleteSnapshotResult == 0) {
+                        echo "Snapshot ${snapshotIdentifier} deleted successfully."
+                    } else {
                         error "Failed to delete snapshot ${snapshotIdentifier}."
                     }
-
-                sh '''
-                    cd Test5B/Code
-                    echo 'about to perform terraform destroy'
-                    terraform destroy --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
-                     '''
                 }
             }
         }
     }     
-        post {
-            always {
-              deleteDir()
+
+    post {
+        always {
+            deleteDir()
         }
     }
-        
-}       
+}
