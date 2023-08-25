@@ -75,7 +75,7 @@ pipeline {
                                     sh '''
                                         cd Test5B/Code
                                         echo 'about to perform terraform apply'
-                                        terraform apply ${planFilePath} --auto-approve
+                                        terraform apply ${TARGET_Env}--auto-approve
                                     '''
                                 }
                             }
@@ -89,7 +89,7 @@ pipeline {
                                     sh '''
                                         cd Test5B/Code
                                         echo 'about to perform terraform destroy'
-                                        terraform destroy ${planFilePath} --auto-approve
+                                        terraform destroy ${TARGET_Env} --auto-approve
                                     '''
                                 }
                             }
