@@ -63,6 +63,8 @@ pipeline {
                             choice(name: 'actionChoice', choices: ['apply', 'destroy'], description: 'Choose to apply or destroy')
                         ]
                     )
+
+                    def planFilePath = "terraform-plan.tfplan"
                     
                     if (userChoice == 'apply') {
                         echo "User chose to apply the Terraform configuration."
@@ -70,12 +72,10 @@ pipeline {
                         stage('Apply Terraform') {
                             steps {
                                 script {
-                                    def planFilePath = "terraform-plan.tfplan"
-
                                     sh '''
                                         cd Test5B/Code
                                         echo 'about to perform terraform apply'
-                                        terraform apply --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars -out=${planFilePath} --auto-approve
+                                        terraform apply ${planFilePath} --auto-approve
                                     '''
                                 }
                             }
@@ -85,11 +85,13 @@ pipeline {
                         // Call the stage for destroying the Terraform configuration
                         stage('Destroy Terraform') {
                             steps {
-                                sh '''
-                                    cd Test5B/Code
-                                    echo 'about to perform terraform destroy'
-                                    terraform destroy --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars -out=${planFilePath} --auto-approve
-                                '''
+                                script {
+                                    sh '''
+                                        cd Test5B/Code
+                                        echo 'about to perform terraform destroy'
+                                        terraform destroy ${planFilePath} --auto-approve
+                                    '''
+                                }
                             }
                         }
                     } else {
