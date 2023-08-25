@@ -61,7 +61,7 @@ pipeline {
                     )
                     
                     if (userChoice == 'apply') {
-                        echo "User chose to apply the Terraform configuration."
+                        echo "User chose to apply the Terraform configuration"
                         // Call the stage for applying the Terraform configuration
                         stage('Apply Terraform') {
                             steps {
@@ -73,7 +73,7 @@ pipeline {
                             }
                         }
                     } else if (userChoice == 'destroy') {
-                        echo "User chose to destroy the Terraform configuration."
+                        echo "User chose to destroy the Terraform configuration"
                         // Call the stage for destroying the Terraform configuration
                         stage('Destroy Terraform') {
                             steps {
