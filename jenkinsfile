@@ -29,19 +29,20 @@ pipeline {
             }
         }
 
-stage('implement plan') {
-    steps {
-        script {
-            def planFilePath = "terraform-plan.tfplan"
+        stage('implement plan') {
+            steps {
+                script {
+                    def planFilePath = "terraform-plan.tfplan"
 
-            sh '''
-                cd Test5B/Code
-                echo 'about to perform terraform plan'
-                terraform plan --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars -out=${planFilePath}
-            '''
+                    sh '''
+                        cd Test5B/Code
+                        echo 'about to perform terraform plan'
+                        terraform plan --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars -out=${planFilePath}
+                    '''
+                }
+            }
         }
-    }
-}
+
         stage ('terraform deploy') {
             options {
                 timeout(time: 2, unit: 'MINUTES')
@@ -63,42 +64,40 @@ stage('implement plan') {
                         ]
                     )
                     
-        if (userChoice == 'apply') {
-            echo "User chose to apply the Terraform configuration"
-            // Call the stage for applying the Terraform configuration
-            stage('Apply Terraform') {
-        stage('Apply Terraform') {
-    steps {
-        script {
-            def planFilePath = "terraform-plan.tfplan"
+                    if (userChoice == 'apply') {
+                        echo "User chose to apply the Terraform configuration."
+                        // Call the stage for applying the Terraform configuration
+                        stage('Apply Terraform') {
+                            steps {
+                                script {
+                                    def planFilePath = "terraform-plan.tfplan"
 
-            sh '''
-                cd Test5B/Code
-                echo 'about to perform terraform apply'
-                terraform apply ${planFilePath} --auto-approve
-            '''
-        }
-    }
-}
-        }
-            } else if (userChoice == 'destroy') {
-                        echo "User chose to destroy the Terraform configuration"
+                                    sh '''
+                                        cd Test5B/Code
+                                        echo 'about to perform terraform apply'
+                                        terraform apply ${planFilePath} --auto-approve
+                                    '''
+                                }
+                            }
+                        }
+                    } else if (userChoice == 'destroy') {
+                        echo "User chose to destroy the Terraform configuration."
                         // Call the stage for destroying the Terraform configuration
-        stage('Destroy Terraform') {
-            steps {
-                sh '''
-                    cd Test5B/Code
-                    echo 'about to perform terraform destroy'
-                    terraform destroy --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars --auto-approve
-                '''
-                }
-            }
-            } else {
+                        stage('Destroy Terraform') {
+                            steps {
+                                sh '''
+                                    cd Test5B/Code
+                                    echo 'about to perform terraform destroy'
+                                    terraform destroy --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars --auto-approve
+                                '''
+                            }
+                        }
+                    } else {
                         error "Invalid choice: ${userChoice}"
+                    }
                 }
             }
         }
-    }
 
         stage ('Delete RDS Snapshot') {
             steps {
