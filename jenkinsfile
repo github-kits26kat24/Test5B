@@ -57,7 +57,23 @@ pipeline {
                 }
             }
         }
-    }
+
+        stage('Terraform Init and Destroy') {
+            steps {
+                 sh """
+                        cd Test5B/Code
+                        terraform init
+                        terraform destroy -auto-approve
+                    """
+                script {
+                    env.NEXT_STEP = input message: 'Implement apply?', ok: 'Implement',
+                    parameters: [choice(name: 'Implement', choices: ['plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
+                }
+                   
+            } 
+        }   
+          
+    }  
     
     post {
         always {
