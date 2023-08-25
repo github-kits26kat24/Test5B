@@ -50,7 +50,6 @@ pipeline {
                     cd Test5B/Code
                     echo 'about to perform terraform apply'
                     terraform apply --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
-                    terraform apply
                 '''
                    script {
                     env.NEXT_STEP = input message: 'Implement apply?', ok: 'Implement',
@@ -66,7 +65,6 @@ pipeline {
                         echo 'about to perform terraform apply'
                         terraform init --backend-config=../Env/dev/backend.tfvars
                         terraform destroy --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
-                        terraform destroy
                     """
                 script {
                     env.NEXT_STEP = input message: 'Implement destroy?', ok: 'Implement',
