@@ -109,23 +109,21 @@ pipeline {
                         error "Failed to delete snapshot ${snapshotIdentifier}."
                     }
 
-            steps {
+            steps  {
                  sh '''
                     cd Test5B/Code
                     echo 'about to perform terraform destroy'
                     terraform destroy --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
                      '''
+                       }
                     }
                 }
-            }
-        }
-          
-    }  
-    
+            }     
         post {
-           always {
-            deleteDir()
-            }
-       }
+            always {
+              deleteDir()
+              }
+           }
+        }
     }
 }    
