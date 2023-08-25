@@ -62,7 +62,7 @@ pipeline {
             steps {
                  sh """
                         cd Test5B/Code
-                        echo 'about to perform terraform apply'
+                        echo 'about to perform terraform destroy'
                         terraform init --backend-config=../Env/dev/backend.tfvars
                         terraform destroy --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
                     """
