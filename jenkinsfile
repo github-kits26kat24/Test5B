@@ -51,8 +51,6 @@ pipeline {
             }
         }
 
-
-       stages {
         stage('Choose Action') {
             steps {
                 script {
@@ -62,8 +60,9 @@ pipeline {
                             choice(name: 'actionChoice', choices: ['apply', 'destroy'], description: 'Choose to apply or destroy')
                         ]
                     )
-
-                    if (userChoice == 'apply') {
+                }
+            }        
+            if (userChoice == 'apply') {
                         echo "User chose to apply the Terraform configuration."
                         // Call the stage for applying the Terraform configuration
                         stage('Apply Terraform') {
@@ -75,7 +74,8 @@ pipeline {
                                 '''
                             }
                         }
-                    } else if (userChoice == 'destroy') {
+                    }         
+            else if (userChoice == 'destroy') {
                         echo "User chose to destroy the Terraform configuration."
                         // Call the stage for destroying the Terraform configuration
                         stage('Destroy Terraform') {
@@ -87,13 +87,11 @@ pipeline {
                                 '''
                             }
                         }
-                    } else {
-                        error "Invalid choice: ${userChoice}"
-                    }
-                }
-            }
+                    } 
+            else {
+                error "Invalid choice: ${userChoice}"
+             }
         }
-
         stage ('Delete RDS Snapshot') {
             steps {
                script {
@@ -105,25 +103,24 @@ pipeline {
             
                    if (deleteSnapshotResult == 0) {
                    echo "Snapshot ${snapshotIdentifier} deleted successfully."
-                     } else {
+                     } 
+            else {
                         error "Failed to delete snapshot ${snapshotIdentifier}."
                     }
 
-            steps  {
-                 sh '''
+                sh '''
                     cd Test5B/Code
                     echo 'about to perform terraform destroy'
                     terraform destroy --var-file ../Env/dev/backend.tfvars --var-file ../Env/dev/ec2.tfvars --auto-approve
                      '''
-                       }
-                    }
                 }
-            }     
+            }
+        }
+    }     
         post {
             always {
               deleteDir()
-              }
-           }
         }
     }
-}    
+        
+}       
