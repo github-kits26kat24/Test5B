@@ -2,10 +2,8 @@ pipeline {
     agent any
     
     parameters {
-        choice(name: "TARGET_Env", choices: ["dev", "sit"], description: "Please select the implementation stage Target Deployment Environment" , choices:'dev\nsit')
+        choice(name: "TARGET_Env", choices: ["dev", "sit"], description: "Target Deployment Environment")
     }
-
-     choice(name:'AWS_ENV', description:'Please select the implementation stage', choices:'dev\nsit')
 
     environment {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
@@ -31,7 +29,7 @@ pipeline {
             }
         }
 
-        stage('implement plan') {
+         stage('implement plan') {
             steps {
                 sh '''
                     cd Test5B/Code
@@ -41,25 +39,6 @@ pipeline {
                 '''
             }
         }
-
-        stage ('terraform deploy') {
-             options {
-                timeout (time: 2, unit: 'MINUTES')
-            }
-
-            steps  {
-                input (message : "Happy to deploy?")
-                echo 'would have deploy'
-            }
-        }
-        
-        stage ('terraform apply') {
-            when {
-                anyOf {
-                    branch 'prod';
-                    branch 'dev'
-                }
-            }
 
         stage('implemention step') {
             steps {
@@ -110,10 +89,9 @@ pipeline {
           
     }  
     
-            post {
+    post {
         always {
             deleteDir()
-            }
         }
     }
-}    
+}
