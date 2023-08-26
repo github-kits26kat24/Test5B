@@ -75,7 +75,7 @@ pipeline {
                                     sh '''
                                         cd Test5B/Code
                                         echo 'about to perform terraform apply'
-                                        terraform apply ${TARGET_Env}--auto-approve
+                                        terraform apply --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars--auto-approve
                                     '''
                                 }
                             }
@@ -89,7 +89,7 @@ pipeline {
                                     sh '''
                                         cd Test5B/Code
                                         echo 'about to perform terraform destroy'
-                                        terraform destroy ${TARGET_Env} --auto-approve
+                                        terraform destroy --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars --auto-approve
                                     '''
                                 }
                             }
