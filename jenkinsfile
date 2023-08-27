@@ -201,7 +201,7 @@ pipeline {
         }   
     }  
     
-        ppost {
+        post {
             always  {
             echo ' i just ran a pipleine'
             deleteDir()
