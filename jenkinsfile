@@ -143,19 +143,20 @@ pipeline {
                 script {
                     env.NEXT_STEP = input message: 'Implement apply?', ok: 'Implement',
                     parameters: [choice(name: 'Implement', choices: ['plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
-                }
-                if (env.NEXT_STEP == 'apply') {
-                    sh '''
-                        cd Test5B/Code
-                        echo 'about to perform terraform apply'
-                        terraform apply --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars --auto-approve
-                    '''
-                } else if (env.NEXT_STEP == 'destroy') {
-                    sh '''
-                        cd Test5B/Code
-                        echo 'about to perform terraform destroy'
-                        terraform destroy --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars --auto-approve
-                    '''
+                    
+                    if (env.NEXT_STEP == 'apply') {
+                        sh '''
+                            cd Test5B/Code
+                            echo 'about to perform terraform apply'
+                            terraform apply --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars --auto-approve
+                        '''
+                    } else if (env.NEXT_STEP == 'destroy') {
+                        sh '''
+                            cd Test5B/Code
+                            echo 'about to perform terraform destroy'
+                            terraform destroy --var-file ../Env/"${TARGET_Env}"/backend.tfvars --var-file ../Env/"${TARGET_Env}"/ec2.tfvars --auto-approve
+                        '''
+                    }
                 }
             }
         }
