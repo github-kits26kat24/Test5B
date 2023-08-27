@@ -137,6 +137,17 @@ pipeline {
             }
         }
 
+    stage ('terraform deploy') {
+             options {
+                timeout (time: 2, unit: 'MINUTES')
+            }
+
+            steps  {
+                input (message : "Happy to deploy?")
+                echo 'would have deploy'
+            }
+        }
+
         stage('implemention step') {
             steps {
                 script {
