@@ -113,7 +113,6 @@ pipeline {
         stage("download code and env config") {
             steps {
                 sh "git clone https://github.com/github-kits26kat24/Test5B.git"
-            }
         }
 
         stage('terraform validate') {
@@ -142,7 +141,7 @@ pipeline {
             steps {
                 script {
                     env.NEXT_STEP = input message: 'Implement apply?', ok: 'Implement',
-                    parameters: [choice(name: 'Implement', choices: ['plan', 'apply', 'destroy', 'do nothing'], description: 'implementation stage')]
+                    parameters: [choice(name: 'Implement', choices: ['apply', 'destroy', 'do nothing'], description: 'implementation stage')]
                     
                     if (env.NEXT_STEP == 'apply') {
                         sh '''
