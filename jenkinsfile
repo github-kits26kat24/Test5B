@@ -113,8 +113,8 @@ pipeline {
         stage("download code and env config") {
             steps {
                 sh "git clone https://github.com/github-kits26kat24/Test5B.git"
+            }
         }
-
         stage('terraform validate') {
             steps {
                 sh '''
