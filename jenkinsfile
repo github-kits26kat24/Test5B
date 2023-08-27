@@ -201,9 +201,17 @@ pipeline {
         }   
     }  
     
-    post {
-        always {
+        ppost {
+            always  {
+            echo ' i just ran a pipleine'
             deleteDir()
+            }
+            success {
+            echo 'pipleine ran successfully'
+            }
+        failure {
+            echo 'pipleine failed'
+           }
         }
     }
-}
+}    
