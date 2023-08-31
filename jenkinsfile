@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
     
@@ -72,6 +73,35 @@ pipeline {
                 }
             }
         }
+
+        stage('Delete RDS Snapshot') {
+            steps {
+                script {
+                    def snapshotIdentifier = "mariadb-final-snapshot" // Replace with the actual snapshot identifier
+
+                    def deleteSnapshotCmd = "aws rds delete-db-snapshot --db-snapshot-identifier ${snapshotIdentifier}"
+
+                    def deleteSnapshotResult = sh(script: deleteSnapshotCmd, returnStatus: true)
+
+                    if (deleteSnapshotResult == 0) {
+                        echo "Snapshot ${snapshotIdentifier} deleted successfully."
+                    } else {
+                        error "Failed to delete snapshot ${snapshotIdentifier}."
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Init and Destroy') {
+            steps {
+                sh """
+                    cd Test5B/Code
+                    echo 'about to perform terraform destroy'
+                    terraform init
+                    terraform destroy --auto-approve
+                """
+            } 
+        }   
     }  
     
         post {
@@ -83,7 +113,7 @@ pipeline {
             echo 'pipleine ran successfully'
             }
         failure {
-            echo 'pipleine failed'
+            echo 'pipleine ran failed'
         }
     }
 }

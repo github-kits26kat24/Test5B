@@ -17,23 +17,23 @@ variable "ec2_key_name" {
   default     = "Kitskat2023"
 }
 
-variable "ec2_name_1" {
-  description = "This is a variable to manage ec2 key name"
-  type        = string
-  default     = "node_1"
-}
+# variable "ec2_name_1" {
+#   description = "This is a variable to manage ec2 key name"
+#   type        = string
+#   default     = "node_1"
+# }
 
-variable "ec2_name_2" {
-  description = "This is a variable to manage ec2 key name"
-  type        = string
-  default     = "node_2"
-}
+# variable "ec2_name_2" {
+#   description = "This is a variable to manage ec2 key name"
+#   type        = string
+#   default     = "node_2"
+# }
 
-variable "ec2_name_3" {
-  description = "This is a variable to manage ec2 key name"
-  type        = string
-  default     = "MariaDB"
-}
+# variable "ec2_name_3" {
+#   description = "This is a variable to manage ec2 key name"
+#   type        = string
+#   default     = "MariaDB"
+# }
 
 variable "sg_name" {
   description = "This is a variable to manage ec2 key name"
